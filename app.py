@@ -1,17 +1,13 @@
-from flask import Flask, render_template
-import random
-
-random_number = random.randint(1, 6)
-print(random_number)
+from flask import Flask, request
 
 app = Flask(__name__)
 
+# Створюємо маршрут для стартової сторінки
 @app.route('/')
-def random_number():
-    # Генеруємо випадкове число від 1 до 6
-    random_number = random.randint(1, 6)
-    
-    # Передаємо випадкове число у HTML-шаблон
-    return render_template('index.html', random_number=random_num)
+def index():
+    # Отримуємо IP-адресу користувача з запиту
+    user_ip = request.remote_addr
+    return f'Ваша IP-адреса: {user_ip}'
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
